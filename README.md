@@ -7,10 +7,11 @@ This is the python code accompanying the paper *Short-term Daily Precipitation F
 ### Requirements
 Following libraries are required to run the scripts:
 
+* Python 3.6 or higher
 * Keras 2.2 or higher
-* Tensorflow 1
+* Tensorflow 1.x.y where x.y is 12.0 or higher
 
-Additionally, we use RAdam for stable learning-rate schedules. RAdam can be installed via pip installer.
+Additionally, we require RAdam for stable learning rate schedules. RAdam can be installed via pip installer:
 
 	pip install keras-rectified-adam
 
@@ -19,31 +20,35 @@ Additionally, we use RAdam for stable learning-rate schedules. RAdam can be inst
 
 #### Basic
 
-The code provides To train the SSAE model using the settings from the papers, simply run the shell script:
+To train SSAE using the provided data, simply run the shell script:
 
 	./Providence.sh
 
-The weights of the trained model will be saved in the `model` folder with the name specified in the `--save` option. 
+The weights of the trained model will be saved in the `model` folder, and the forecast values will be saved in `path/to/data_XXXXXX-xxxxxx.csv`. 
 
 #### Running the script in different modes
 
-The default argument `--mode training` let you train and evaluate the model. In addition, there are `--mode prediction` to make a forecast from a single stream of past data and `--mode evaluation` to load the pretrained weights and evaluate the model on the test set. To use these two modes, you need to specify the location of the pretrained weights
+The default argument `--mode training` let you train and evaluate the model. In addition, there are
+ 
+	--mode prediction
 
-	--load model/pretrained_weights.h5
+to make a forecast from a single stream of past data and
 
-and the test data
+	--mode evaluation
+
+to load the pretrained weights and evaluate the model on the test set. To use these two modes, you need to specify the location of the pretrained weights using `--load` option.
+
+	--load model/pvd_ssae_3.h5
+
+You also need to specify the test data.
 
 	--test_data Data/data_name.csv
 
-An example of a shell script that runs in prediction and evaluation mode is provided in `Providence_predict.sh` and `Providence_eval.sh`, respectively. To run in these modes, you need to change some parameters:
-* For all models, the parameter of `--horizon` must match the forecast horizon of the loaded weights.
+We have prepared the scripts for these modes as `Providence_predict.sh` and `Providence_eval.sh`, as well as the pretrained weights for all three models in the `model` folder. Note that these scripts use the training data as the test data.
+
+To run in these modes, you need to change some parameters:
+* For all models, the parameter of `--horizon` must match the forecast horizon of the pretrained weights.
 * For S2S-1 model, you have to change the parameter of `--hidden` to 100.
-
-#### Saving the predictions
-
-The `training` and `evaluation` mode also allows you to save the predictions by adding the following option to the script:
-
-	--save_predictions filename.csv
 
 #### Changing the loss function
 
@@ -62,6 +67,6 @@ Lastly, the descriptions of all options can be accessed via the command:
 	./Providence.sh -h
 
 
-The scripts are tested with Python version 3.6, Keras version 2.2.4 and Tensorflow version 1.12.0
+The scripts are tested with Python version 3.6, Keras version 2.2.4 and Tensorflow version 1.12.0.
 
 

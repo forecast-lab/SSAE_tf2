@@ -56,7 +56,7 @@ parser.add_argument('--decay_rate', type=float, default=0.955,
                    help='The exponential decay rate of the learning rate schedule')
 parser.add_argument('--decay_steps', type=int, default=20,
                    help='The number of steps to reach the specified decay rate')
-parser.add_argument('--save_predictions', action='store_true', default=False,
+parser.add_argument('--save_predictions', action='store_true', default=True,
                    help='Save the predictions (starting from day (season_)window+1) to a *.csv file')
 parser.add_argument('--save', type=str,  default='model/pvd.h5',
                     help='path to save the final model (only in training mode')
@@ -193,6 +193,7 @@ if args.mode == 'training':
     # At any point you can hit Ctrl + C to break out of training early.
     try:
 #         print('Begin training (press Ctrl + C to interrupt)...');
+        print('Training in progress...')
         model.fit(train_in,y_train_out, 
               epochs=args.epochs, 
               batch_size=args.batch_size, 
@@ -200,10 +201,12 @@ if args.mode == 'training':
         model.save_weights(args.save)
 #         print('model saved as',str(args.save),'. Evaluating the model on the test set...')
         test_rmse, test_corr, y_pred = evaluate(model, test_in, y_test_out)
-        print (uplim*test_rmse, test_corr)
+        print("test rmse {:5.4f} | test corr {:5.4f}".format(uplim*test_rmse, test_corr))
         if args.save_predictions:
-            timestr = time.strftime("%Y%m%d-%H%M%S")
-            np.savetxt(args.data[:-4]+timestr+'.csv', uplim*y_pred, delimiter = ',')
+            timestr = time.strftime("%y%m%d-%H%M%S")
+            file_name = args.data[:-4]+'_'+timestr+'.csv'
+            np.savetxt(file_name, uplim*y_pred, delimiter = ',')
+            print('Forecast values saved in ',file_name)
             
 
     except KeyboardInterrupt:
@@ -239,8 +242,11 @@ elif args.mode == 'evaluation':
     test_rmse, test_corr, y_pred = evaluate(model, test_in, y_test_out)
     print ("test rmse {:5.4f} | test corr {:5.4f}".format(uplim*test_rmse, test_corr))
     if args.save_predictions:
-        timestr = time.strftime("%Y%m%d-%H%M%S")
-        np.savetxt(args.data[:-4]+timestr+'.csv', uplim*y_pred, delimiter = ',')
+        timestr = time.strftime("%y%m%d-%H%M%S")
+        file_name = args.data[:-4]+'_'+timestr+'.csv'
+        np.savetxt(file_name, uplim*y_pred, delimiter = ',')
+        print('Forecast values saved in ',file_name)
+
         
 else:
     raise ValueError("The mode must be one of 'training', 'prediction' or 'evaluation'.")
