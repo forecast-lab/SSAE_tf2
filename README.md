@@ -36,7 +36,7 @@ to make a forecast from a single stream of past data and
 
 	--mode evaluation
 
-to load the pretrained weights and evaluate the model on the test set. To use these two modes, you need to specify the location of the pretrained weights using `--load` option.
+to load the pretrained weights and evaluate the model on the test set. To use these two modes, you need to specify the location of the pretrained weights using `--load` option. For example, the weights of SSAE that makes forecast over the next three days on Providence dataset are stored in `pvd_ssae_3.h5`
 
 	--load model/pvd_ssae_3.h5
 
@@ -44,7 +44,7 @@ You also need to specify the test data.
 
 	--test_data Data/data_name.csv
 
-We have prepared the scripts for these modes as `Providence_predict.sh` and `Providence_eval.sh`, as well as the pretrained weights for all three models in the `model` folder. Note that these scripts use the training data as the test data.
+We have prepared the scripts for these modes, namely `Providence_predict.sh` and `Providence_eval.sh`, as well as the pretrained weights for all three models in the `model` folder. Note that these scripts use the training data as the test data.
 
 To run in these modes, you need to change some parameters:
 * For all models, the parameter of `--horizon` must match the forecast horizon of the pretrained weights.
