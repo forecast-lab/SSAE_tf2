@@ -86,6 +86,14 @@ class Autoencoder(Model):
     
     
 class S2S1(Model):
+    """ S2S-1
+    # Arguments
+        horizon: int, >=1. Forecast horizon.
+        hidden: int, >=1. Number of hidden units in the short component. 
+        encoder_activation: string. Activation function in the encoder part of the short component.
+        decoder_activation: string. Activation function in the decoder part of the short component.
+    """
+
     def __init__(self, horizon, 
                  hidden,
                  decoder_activation = 'tanh',
@@ -124,6 +132,14 @@ class S2S1(Model):
     
     
 class S2S2(Model):
+    """ S2S-2
+    # Arguments
+        horizon: int, >=1. Forecast horizon.
+        hidden: int, >=1. Number of hidden units in the short component. 
+        encoder_activation: string. Activation function in the encoder part of the short component.
+        decoder_activation: string. Activation function in the decoder part of the short component.
+    """
+
     def __init__(self, horizon, 
                  hidden,
                  decoder_activation,
@@ -160,6 +176,22 @@ class S2S2(Model):
         return (input_shape[0], self.horizon,)
     
 class SSAE(Model):
+    """ Seasonally-integrated autoencoder
+    # Arguments
+        short_history: int, >=1. Look-back window of short component
+        horizon: int, >=1. Forecast horizon.
+        seasonal_features: list. Indices of the variables to be used for seasonal component. 
+        pool_size: int, >=1. Window size of average pooling.
+        strides: int, >=1. Step size of moving window in average pooling.
+        hidden: int, >=1. Number of hidden units in the short component. 
+        seasonal_hidden: int, >=1. Number of hidden units in the seasonal components.
+        encoder_activation: string. Activation function in the encoder part of the short component.
+        seasonal_encoder_activation: string. Activation function in the encoder part of the seasonal component.
+        decoder_activation: string. Activation function in the decoder part of the short component.
+        seasonal_decoder_activation: string. Activation function in the decoder part of the seasonal component.
+        integrate_method: string. Type of decomposition into seasonal and short components: 'add' for Additive, 'multiply' for multiplicative and 'linear' for a linear combination. 
+    """
+
     def __init__(self, short_history,
                  horizon,
                  seasonal_features,

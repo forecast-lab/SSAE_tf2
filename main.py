@@ -72,10 +72,10 @@ import time
 
 from keras.models import Model
 from keras.layers import Input
-from keras_radam import RAdam
 
 from models import S2S1, S2S2, SSAE
 from losses import q_loss
+from keras_radam.optimizer import RAdam
 from callbacks import LearningRateExponentialDecay
 from utils import _transform_indices, _transform_wind
 from utils import _train_test_split, _preprocess
