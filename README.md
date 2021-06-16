@@ -12,8 +12,27 @@ Following libraries are required to run the scripts:
 
 ### Usage
 
+#### Model
 
-#### Basic
+To build a SSAE model, use
+
+	from tensorflow.keras.layers import Input
+	from models import SSAE
+
+        input_node = Input(shape=(window_size, num_features))
+        output = SSAE(short_history,
+                         horizon,
+                         seasonal_features,
+                         pool_size,
+                         strides,
+                         hidden,
+                         seasonal_hidden)(input_node)
+
+	model = Model(inputs=input_node,outputs=output)
+	
+The input must have shape `(num_rows, window_size, num_features)` and the output must have shape `(num_rows, window_size)`.
+	
+#### Experiments
 
 To train SSAE using the provided data, simply run the shell script:
 
