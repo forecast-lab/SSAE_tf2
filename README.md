@@ -8,8 +8,7 @@ This is the python code accompanying the paper *Short-term Daily Precipitation F
 Following libraries are required to run the scripts:
 
 * Python 3.6 or higher
-* Keras 2.2 or higher
-* Tensorflow 1.x.y where x.y is 12.0 or higher
+* Tensorflow 2
 
 ### Usage
 
