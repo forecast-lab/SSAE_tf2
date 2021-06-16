@@ -14,7 +14,7 @@ Following libraries are required to run the scripts:
 
 #### Model
 
-To build a SSAE model, place `models.py` in working directory and use:
+To build a SSAE model, place `models.py` in working directory and write the following script:
 
 	from tensorflow.keras.layers import Input
 	from models import SSAE
@@ -26,7 +26,7 @@ To build a SSAE model, place `models.py` in working directory and use:
  			pool_size,			#Window size of average pooling.
  			strides,			#Step size of moving window in average pooling.
  			hidden,				#Number of hidden units in the short component. 
- 			seasonal_hidden			#Number of hidden units in the seasonal components.
+			seasonal_hidden			#Number of hidden units in the seasonal components.
 			)(input_node)
 
 	model = Model(inputs=input_node,outputs=output)
