@@ -1,6 +1,6 @@
-from keras.models import Model
-from keras.layers import Layer, Input, Lambda, Reshape, Concatenate, LSTM
-from keras.layers import Dense, AveragePooling1D, Add, Multiply, RepeatVector
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Layer, Input, Lambda, Reshape, Concatenate, LSTM
+from tensorflow.keras.layers import Dense, AveragePooling1D, Add, Multiply, RepeatVector
 
 
 class Autoencoder(Model):

@@ -70,12 +70,12 @@ args = parser.parse_args()
 import numpy as np
 import time
 
-from keras.models import Model
-from keras.layers import Input
+from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
 
 from models import S2S1, S2S2, SSAE
 from losses import q_loss
-from keras_radam.optimizer import RAdam
+from tensorflow_addons.optimizers import RectifiedAdam as RAdam
 from callbacks import LearningRateExponentialDecay
 from utils import _transform_indices, _transform_wind
 from utils import _train_test_split, _preprocess
@@ -177,7 +177,7 @@ model = create_model(args, feature_num)
 lrd = LearningRateExponentialDecay(init_learning_rate=args.lr, 
                                    decay_rate=args.decay_rate, 
                                    decay_steps=args.decay_steps)
-ra_adam = RAdam(lr=args.lr, beta_1=0.9, beta_2=0.99, epsilon=None, 
+ra_adam = RAdam(lr=args.lr, beta_1=0.9, beta_2=0.99, 
                           decay=0.0, amsgrad=False, warmup_proportion=0.1)
 
 if args.loss == 0:
