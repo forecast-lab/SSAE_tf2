@@ -14,19 +14,20 @@ Following libraries are required to run the scripts:
 
 #### Model
 
-To build a SSAE model, use
+To build a SSAE model, place `models.py` in working directory and use:
 
 	from tensorflow.keras.layers import Input
 	from models import SSAE
 
-        input_node = Input(shape=(window_size, num_features))
-        output = SSAE(short_history,
-                         horizon,
-                         seasonal_features,
-                         pool_size,
-                         strides,
-                         hidden,
-                         seasonal_hidden)(input_node)
+	input_node = Input(shape=(window_size, num_features))
+	output = SSAE(short_history,			#Look-back window of short component 
+			horizon,			#Forecast horizon.
+ 			seasonal_features,		#Indices of the variables to be used for seasonal component. 
+ 			pool_size,			#Window size of average pooling.
+ 			strides,			#Step size of moving window in average pooling.
+ 			hidden,				#Number of hidden units in the short component. 
+ 			seasonal_hidden			#Number of hidden units in the seasonal components.
+			)(input_node)
 
 	model = Model(inputs=input_node,outputs=output)
 	
