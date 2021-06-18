@@ -4,7 +4,7 @@
 
 This is the python code accompanying the paper 
 
-	Ponnoprat, D. (2021). Short-term daily precipitation forecasting with seasonally-integrated autoencoder. Applied Soft Computing, 102, 107083. https://doi.org/10.1016/j.asoc.2021.107083
+> Ponnoprat, D. (2021). Short-term daily precipitation forecasting with seasonally-integrated autoencoder. Applied Soft Computing, 102, 107083. https://doi.org/10.1016/j.asoc.2021.107083
 	
 The code comes with the shell scripts to train and evaluate the autoencoder models (S2S1, S2S2 and SSAE) on the datasets used in the paper.
 
