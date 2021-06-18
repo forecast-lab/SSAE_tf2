@@ -14,7 +14,7 @@ Following libraries are required to run the scripts:
 
 #### Model
 
-To build a SSAE model, place `models.py` in working directory and write the following script:
+To build an SSAE model, place `models.py` in working directory and write the following script:
 
 	from tensorflow.keras.layers import Input
 	from models import SSAE
